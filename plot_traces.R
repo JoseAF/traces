@@ -25,6 +25,20 @@ aver_traces <- function(dir){
        cbind(all[,1], rowMeans(m2), rowMeans(m3))
 }
 
+plot_aver_diff <- function(dir=getwd()) {
+       av <- aver_traces(dir)
+       
+       diff <- data.frame(av[,1],av[,2]-av[,3])
+       
+       x_init = 23000
+       x_end = 30000
+       
+       plot(diff[x_init:x_end,],type='l',xlab='Time (ms)',ylab='Current (pA)',
+            col = 'black')
+       
+       abline(h = 0, lty = 'dashed', col = "black")
+}
+
 ## Plots the averaged data provided by aver_traces function (above). 
 ##     Black curve: Averaged currents (pA) for -100 mV prepulse data (traces 1)
 ##     Red curve: Averaged currents (pA) for -40 mV prepulse data (traces 2)
